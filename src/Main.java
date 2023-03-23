@@ -1,6 +1,9 @@
 import java.util.Scanner;
 
 public class Main {
+    /** Функция ввода корректного числа
+     * @return number - введенное число
+     */
     public static Integer enterNumber()
     {
         Scanner scan = new Scanner(System.in);
