@@ -1,51 +1,38 @@
 import java.util.Scanner;
 
 public class Main {
-    /** Функция ввода корректного числа
-     * @return number - введенное число
-     */
-    public static Integer enterNumber()
-    {
-        Scanner scan = new Scanner(System.in);
-        String s ="";
-        Integer number = null;
-        s =scan.next();
-
-        try{
-            number = Integer.parseInt(s);
-        }catch (NumberFormatException e){
-            System.out.println("Incorrect input");
-        }
-        return number;
-    }
     public static void main(String[] args) {
         SimpleLinkedListWrapper<Integer> list = new SimpleLinkedListWrapper<>();
+        Scanner scan = new Scanner(System.in);
+        int ind = 0, stop = 4;
 
-        Integer ind = 0, stop = 4;
-        while (!stop.equals(ind)){
+        while (stop != ind){
             System.out.println("-------\n1.Add\n2.Remove\n3.Print\n4.Exit\n-------");
-            ind = enterNumber();
 
-            switch (ind){
-                case 1:
-                    System.out.println("Enter number");
-                    Integer number = enterNumber();
-                    if(number != null)
-                        list.add(number);
-                    break;
-                case 2:
-                    System.out.println("Enter index");
-                    Integer index = enterNumber();
-                    if(index != null){
-                        try {
-                            list.remove(index);
-                        }catch (IndexOutOfBoundsException e){
-                            System.out.println("Index out of range");
+            if(scan.hasNextInt()){
+                ind = scan.nextInt();
+
+                switch (ind){
+                    case 1:
+                        System.out.println("Enter number");
+                        if(scan.hasNextInt()) {
+                            list.add(scan.nextInt());
                         }
-                    }
-                    break;
-                case 3:
-                    list.print();
+                        break;
+                    case 2:
+                        System.out.println("Enter index from 0 to " + list.size());
+                        if(scan.hasNextInt()) {
+                            try {
+                                list.remove(scan.nextInt());
+                            } catch (IndexOutOfBoundsException e) {
+                                System.out.println("Index out of range");
+                            }
+                        }
+                        break;
+                    case 3:
+                        list.print();
+                        break;
+                }
             }
         }
     }
